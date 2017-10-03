@@ -24,6 +24,7 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         self.t = 0
+        self.a = 0.01 #used as a constant in the decay function
 
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
@@ -44,7 +45,7 @@ class LearningAgent(Agent):
             self.alpha = 0
         else:
             #self.epsilon = self.epsilon - 0.05
-            self.epsilon = math.exp(-self.alpha*self.t)
+            self.epsilon = math.exp(-self.a*self.t)
             self.t += 1
         return None
 
@@ -97,9 +98,9 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        
-        if state not in self.Q:
-            self.Q[state] = {'left':0, 'right':0, 'forward':0, None:0}
+        if learning is true:
+            if state not in self.Q:
+                self.Q[state] = {'left':0, 'right':0, 'forward':0, None:0}
             
         return
 
